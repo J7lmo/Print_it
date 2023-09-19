@@ -18,18 +18,49 @@ const slides = [
 ]
 var fleche_gauche = document.querySelector(".arrow_left");
 var fleche_droite = document.querySelector(".arrow_right");
-var container = document.querySelector(".dots"); 
+var dots = document.querySelector(".dots"); 
+const img = document.querySelectorAll(".banner-img"); 
+const nbSlide = img.length
+let i = 0;
 
-fleche_gauche.addEventListener("click",function() {
-	console.log("Clic sur le bouton gauche")
-})
 
-fleche_droite.addEventListener("click",function() {
-	console.log("Clic sur le bouton droite")
-})
 
 for (let i = 0; i < slides.length; i++) {
 	const Newdots = document.createElement("div");
 	Newdots.className = "dot";
-	container.appendChild(Newdots);
+	dots.appendChild(Newdots);
 }
+
+const nbdot = document.querySelectorAll(".dot")
+nbdot[0].classList.add('dot_selected')
+
+function Slideprecedent(){
+	img[i].classList.remove('active')
+	nbdot[i].classList.remove('dot_selected')
+
+	if(i != 0){
+		i --;
+	} else {
+		i = nbSlide - 1;
+	}
+	img[i].classList.add('active')
+	nbdot[i].classList.add('dot_selected')
+	console.log(i);
+}
+
+function Slidesuivante(){
+	img[i].classList.remove('active')
+	nbdot[i].classList.remove('dot_selected')
+
+	if(i < nbSlide - 1){
+		i ++;
+	} else {
+		i = 0;
+	}
+	img[i].classList.add('active')
+	nbdot[i].classList.add('dot_selected')
+	console.log(i);
+}
+
+fleche_gauche.addEventListener("click",Slideprecedent)
+fleche_droite.addEventListener("click",Slidesuivante)
